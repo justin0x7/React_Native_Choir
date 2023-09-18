@@ -6,6 +6,7 @@ import {AsyncThunkConfig} from '..';
 const initialState: IUserSlice = {
   isLoggedIn: false,
   userName: 'test',
+  userData: []
 };
 
 export const loginRequest = createAsyncThunk<
@@ -18,6 +19,22 @@ export const loginRequest = createAsyncThunk<
         // TODO: connect to backend
       
         return {userName};
+    } catch(e) {
+        console.log('login error = ', e)
+    }
+});
+
+export const readUserData = createAsyncThunk<
+  any,
+  void,
+  AsyncThunkConfig
+>('user/readUserData', async (_ ,{dispatch, getState}) => {
+    try {
+        // TODO: connect to BE
+
+        const userList = [{
+
+        }]
     } catch(e) {
         console.log('login error = ', e)
     }

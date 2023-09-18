@@ -17,6 +17,11 @@ const ReadArticle: React.FC<IArticleScreenProps> = ({ navigation, route }) => {
         navigation.navigate("CommentScreen");
     }
 
+    const onPressGotoSearch = () => {
+        console.log('on press goto SearchScreen')
+        navigation.navigate("SearchScreen");
+    }
+
     return (
         <>
             <View style={styles.mainContainer}>
@@ -75,8 +80,12 @@ const ReadArticle: React.FC<IArticleScreenProps> = ({ navigation, route }) => {
                     </ScrollView>
                 </View>
             </View>
-            <SideMenu color='black' onComment={onPressGotoComments} />
-            <Footer></Footer>
+            <SideMenu
+                color='black'
+                onComment={onPressGotoComments} />
+            <Footer
+                onSearch={onPressGotoSearch}
+            />
         </>
     );
 }

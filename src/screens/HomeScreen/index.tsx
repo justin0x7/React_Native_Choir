@@ -24,6 +24,11 @@ const HomeScreen: React.FC<IHomeScreenProps> = ({ navigation, route }) => {
     console.log('on press goto CommentScreen')
     navigation.navigate("CommentScreen");
   }
+  
+  const onPressGotoSearch = () => {
+    console.log('on press goto SearchScreen')
+    navigation.navigate("SearchScreen");
+  }
 
   return (
     <>
@@ -57,8 +62,13 @@ const HomeScreen: React.FC<IHomeScreenProps> = ({ navigation, route }) => {
         color="#841584"
       /> */}
       </View>
-      <SideMenu onComment={onPressGotoComments} color='white' />
-      <Footer></Footer>
+      <SideMenu
+        onComment={onPressGotoComments}
+        color='white'
+      />
+      <Footer
+        onSearch={onPressGotoSearch}
+      />
     </>
   );
 }

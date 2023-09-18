@@ -8,13 +8,16 @@ const searchIcon = require('../assets/images/search.png');
 const magicIcon = require('../assets/images/magic.png');
 const bookIcon = require('../assets/images/book.png');
 
-const Footer = () => {
+interface Props {
+    onSearch: any;
+}
+
+const Footer = (props: Props) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [opacityActive, setOpacityActive] = useState(false);
 
     const openCategoryModal = () => {
         setModalVisible(true);
-        setOpacityActive(true);
     }
 
     const closeCategoryModal = () => {
@@ -29,7 +32,7 @@ const Footer = () => {
                     source={houseIcon}
                 />
             </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.5}>
+            <TouchableOpacity activeOpacity={0.5} onPress={props.onSearch}>
                 <Image
                     style={styles.houseStyle}
                     source={searchIcon}
@@ -76,6 +79,7 @@ const styles = StyleSheet.create({
         paddingLeft: scale(30),
         paddingRight: scale(30),
         paddingTop: scale(10),
+        paddingBottom: scale(5),
     },
     houseStyle: {
         width: scale(32),

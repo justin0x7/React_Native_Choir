@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
   Content: {
     flex: 1,
     width: Metrics.screenWidth,
+    paddingBottom: scale(250)
   },
   homeTitle: {
     alignItems: "center",
@@ -46,6 +47,46 @@ const styles = StyleSheet.create({
     marginRight: scale(65),
     lineHeight: scale(20),
     color: AppColors.black
+  },
+  commentProfile: {
+    flexDirection: 'row'
+  },
+  commentAvatar: {
+    justifyContent: 'center',
+    width: scale(27),
+    height: scale(27)
+  },
+  commentContent: {
+    paddingLeft: scale(30),
+    paddingRight: scale(30)
+  },
+  commmentMessages: {
+    marginTop: scale(5),
+    backgroundColor: AppColors.gray,
+    padding: scale(10),
+    borderRadius:scale(20)
+  },
+  commentOwner: {
+    justifyContent: 'center',
+    paddingLeft: scale(10)
+  },
+  hearts: {
+    paddingLeft: scale(10),
+    paddingTop: scale(5),
+    flexDirection: 'row',
+  },
+  heartsSum: {
+    position: 'relative',
+    bottom: scale(3),
+    left: scale(10)
+  },
+  sendMessage: {
+    marginTop: scale(5),
+    // height: scale(150),
+    borderColor: AppColors.black,
+    borderWidth: scale(1),
+    margin: scale(25),
+    borderRadius:scale(20)
   }
 });
 

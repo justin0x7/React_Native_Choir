@@ -12,6 +12,8 @@ import ArticleScreen from './screens/Articles';
 import CommentScreen from './screens/Comments';
 import DetailScreen from './screens/DetailScreen';
 import HomeScreen from "./screens/HomeScreen";
+import SearchScreen from "./screens/Search"
+import CurrentChannelsScreen from "./screens/Channels"
 import { store } from './store';
 import { IRouterParamList } from './types/router';
 
@@ -42,6 +44,38 @@ const App: React.FC = () => {
             component={CommentScreen}
             options={{ headerShown: false }}
           />
+          <Stack.Screen
+            name="SearchScreen"
+            component={SearchScreen}
+            options={{ headerShown: false }}
+          />
+          {/* Message Chat */}
+          {/* <Stack.Screen
+            name="CurrentChannelsScreen"
+            component={CurrentChannelsScreen}
+            options={{ headerShown: false }}
+          /> */}
+          {/* <Stack.Screen
+            name="Chat"
+            component={ChatScreen}
+            options={({ navigation }) => ({
+              title: currentChannel?.name || "Chat",
+              headerBackTitle: "",
+              headerRight: () => (
+                <TouchableOpacity onPress={() => navigation.navigate("Members")}>
+                  <Octicons name="people" size={24} color={isDark ? "#fff" : "#2a2a39"} />
+                </TouchableOpacity>
+              ),
+            })}
+          /> */}
+          {/* <Stack.Screen
+            name="Members"
+            component={ChannelMembersScreen}
+            options={{
+              title: currentChannel?.name || "Members",
+              headerBackTitle: "",
+            }}
+          /> */}
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
