@@ -60,15 +60,24 @@ const styles = StyleSheet.create({
     paddingRight: scale(30),
     paddingTop: scale(30)
   },
+  commentSubContent: {
+    paddingLeft: scale(70),
+    paddingRight: scale(50),
+    paddingTop: scale(30)
+  },
   commmentMessages: {
     marginTop: scale(5),
     backgroundColor: AppColors.gray,
     padding: scale(10),
-    borderRadius:scale(20)
+    borderRadius:scale(20),
+  },
+  fontColor: {
+    color: AppColors.black
   },
   commentOwner: {
     justifyContent: 'center',
-    paddingLeft: scale(10)
+    paddingLeft: scale(10),
+    color: AppColors.black
   },
   hearts: {
     paddingLeft: scale(10),
@@ -78,7 +87,8 @@ const styles = StyleSheet.create({
   heartsSum: {
     position: 'relative',
     bottom: scale(3),
-    left: scale(10)
+    left: scale(10),
+    color: AppColors.black
   },
   sendMessage: {
     marginTop: scale(5),
@@ -87,6 +97,18 @@ const styles = StyleSheet.create({
     borderWidth: scale(1),
     margin: scale(25),
     borderRadius:scale(20)
+  },
+  replyMessage: {
+    marginTop: scale(5),
+    // height: scale(150),
+    borderColor: AppColors.black,
+    borderWidth: scale(1),
+    marginLeft: scale(50),
+    marginBottom: scale(5),
+    borderRadius:scale(20),
+    width: scale(250),
+    height:scale(40),
+    paddingLeft: scale(10)
   },
   sendMessageIcon: {
     position:'absolute',
@@ -110,8 +132,23 @@ const styles = StyleSheet.create({
     paddingTop: scale(2),
     borderRadius: scale(10),
   },
+  options1: {
+    position: 'absolute',
+    right: scale(10),
+    top: scale(-30),
+    borderWidth: scale(1),
+    borderColor: AppColors.black,
+    paddingLeft: scale(15),
+    paddingRight: scale(15),
+    paddingBottom: scale(2),
+    paddingTop: scale(2),
+    borderRadius: scale(10),
+  },
   delete: {
     color: AppColors.red,
+  },
+  footerContainer: {
+    flex: 1,
   }
 });
 
