@@ -3,5 +3,11 @@ export interface ILoginRequest {
 }
 export type UserType = {
   name: string,
-  avatar: string
+  image: any,
+  description: string
+}
+export type ArticleType = {
+  name: string,
+  image: any,
+  description: string
 }

@@ -5,3 +5,5 @@ export interface IUserSlice {
   userName: string;
   userData: Array<UserType>;
 }
+
+

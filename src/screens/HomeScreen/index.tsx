@@ -16,17 +16,17 @@ const homeTitle = require('../../assets/images/HomeTitle.png');
 
 const HomeScreen: React.FC<IHomeScreenProps> = ({ navigation, route }) => {
   const onPressGotoArticle = () => {
-    console.log('on press goto ArticleScreen')
+    console.log('on press goto ArticleScreen');
     navigation.navigate("ArticleScreen");
   }
 
   const onPressGotoComments = () => {
-    console.log('on press goto CommentScreen')
+    console.log('on press goto CommentScreen');
     navigation.navigate("CommentScreen");
   }
   
   const onPressGotoSearch = () => {
-    console.log('on press goto SearchScreen')
+    console.log('on press goto SearchScreen');
     navigation.navigate("SearchScreen");
   }
 

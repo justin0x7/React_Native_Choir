@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
     FlatList,
     Image,
@@ -23,16 +23,28 @@ const Ellipse7 = require('../../assets/images/Ellipse2.png');
 const Ellipse8 = require('../../assets/images/Ellipse3.png');
 const Ellipse9 = require('../../assets/images/Ellipse4.png');
 const Ellipse10 = require('../../assets/images/Ellipse5.png');
+import SendMessage from '../../assets/images/SendMessage.svg';
+import ThreeDots from '../../assets/images/Dots.svg';
+
 
 const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => {
+    const [message, setMessage] = useState('');
+    const [dotStatus, setDotStatus] = useState<number | null>(null);
+    // const dotsRef = useRef<View>(null);
+
     const onPressGotoSearch = () => {
         console.log('on press goto SearchScreen')
         navigation.navigate("SearchScreen");
     }
 
+    const toggleDots = (key: number) => {
+        // setDotStatus(!dotStatus);
+        setDotStatus(key === dotStatus ? null : key);
+    }
+
     const [data, setData] = useState([
-        { updateHeart: false, sum: 5, key: 1, name: 'Joel', image: Ellipse6, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
-        { updateHeart: false, sum: 29, key: 2, name: 'John', image: Ellipse7, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
+        { updateHeart: false, sum: 5, key: 1, name: 'MetaCoffee', image: Ellipse6, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
+        { updateHeart: false, sum: 29, key: 2, name: 'MetaCoffee', image: Ellipse7, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
         { updateHeart: false, sum: 4, key: 3, name: 'Jillian', image: Ellipse8, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
         { updateHeart: false, sum: 9, key: 4, name: 'Jimmy', image: Ellipse9, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
         { updateHeart: false, sum: 0, key: 5, name: 'Julie', image: Ellipse10, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
@@ -52,25 +64,43 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
         const newData = [...data];
         const index = newData.findIndex((i) => i.key === keyNum);
         newData[index].updateHeart = !newData[index].updateHeart
-        newData[index].sum += newData[index].updateHeart ? -1 : 1;
+        newData[index].sum += newData[index].updateHeart ? 1 : -1;
         setData(newData);
     };
+
+    const onSendMessage = () => {
+        if (message) {
+            const newMessage = {
+                sum: 0,
+                key: data.length + 1,
+                name: 'MetaCoffee',
+                image: Ellipse5,
+                description: message,
+                updateHeart: false,
+                // showDots: false,
+            };
+            setData([...data, newMessage]);
+            setMessage('');
+        }
+    }
 
     return (
         <>
             <View style={styles.mainContainer}>
+                <View style={styles.CommentTitle}>
+                    <Text style={styles.commentSubject}>
+                        Comments
+                    </Text>
+                </View>
+                <View>
+                    <Text style={styles.articleSubject}>
+                        People you follow
+                    </Text>
+                </View>
                 <View style={styles.Content}>
-                    <View style={styles.CommentTitle}>
-                        <Text style={styles.commentSubject}>
-                            Comments
-                        </Text>
-                    </View>
+
                     <View>
-                        <View>
-                            <Text style={styles.articleSubject}>
-                                People you follow
-                            </Text>
-                        </View>
+
                         <View>
                             <View>
                                 <FlatList
@@ -84,6 +114,33 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
                                                 </View>
                                                 <View style={styles.commmentMessages}>
                                                     <Text numberOfLines={6}>{item.description}</Text>
+                                                    {item.name === "MetaCoffee" ? (
+                                                        <>
+                                                            <TouchableOpacity style={styles.dots} onPress={() => toggleDots(item.key)} activeOpacity={0.5} >
+                                                                <ThreeDots />
+                                                            </TouchableOpacity>
+                                                            {item.key &&
+                                                                dotStatus === item.key ? (
+                                                                <View style={styles.options}>
+                                                                    <TouchableOpacity>
+                                                                        <Text>
+                                                                            Edit
+                                                                        </Text>
+                                                                    </TouchableOpacity>
+                                                                    <TouchableOpacity>
+                                                                        <Text style={styles.delete}>
+                                                                            Delete
+                                                                        </Text>
+                                                                    </TouchableOpacity>
+                                                                </View>
+                                                            ) : (
+                                                                <></>
+                                                            )}
+
+                                                        </>
+                                                    ) : (
+                                                        <></>
+                                                    )}
                                                 </View>
                                                 <View style={styles.hearts} >
                                                     <TouchableOpacity activeOpacity={0.5} onPress={() => onPressHeart(item.key)}>
@@ -102,13 +159,18 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
                 </View>
             </View>
             <GoToPrev />
-            <View >
+            <View style={styles.sendMessage}>
                 <TextInput
-                    style={styles.sendMessage}
                     numberOfLines={8}
+                    multiline
                     placeholder="Add a comment..."
                     textAlignVertical="top"
+                    value={message}
+                    onChangeText={setMessage}
                 />
+                <TouchableOpacity activeOpacity={0.5} onPress={() => onSendMessage()}>
+                    <SendMessage style={styles.sendMessageIcon} />
+                </TouchableOpacity>
             </View>
             <Footer
                 onSearch={onPressGotoSearch}

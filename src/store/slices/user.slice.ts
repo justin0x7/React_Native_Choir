@@ -3,6 +3,9 @@ import {IUserSlice} from '../../types/slices/user';
 import {ILoginRequest} from '../../types/common';
 import {AsyncThunkConfig} from '..';
 
+// import test data
+import { testUserData } from '../../assets/testData';
+
 const initialState: IUserSlice = {
   isLoggedIn: false,
   userName: 'test',
@@ -17,7 +20,7 @@ export const loginRequest = createAsyncThunk<
     try {
         console.log('login request = ', userName);
         // TODO: connect to backend
-      
+        
         return {userName};
     } catch(e) {
         console.log('login error = ', e)
@@ -31,10 +34,9 @@ export const readUserData = createAsyncThunk<
 >('user/readUserData', async (_ ,{dispatch, getState}) => {
     try {
         // TODO: connect to BE
+        const userList = testUserData;
 
-        const userList = [{
-
-        }]
+        return userList
     } catch(e) {
         console.log('login error = ', e)
     }
@@ -56,7 +58,13 @@ const userSlice = createSlice({
       })
       .addCase(loginRequest.rejected, (_state, {error}) => {
         console.log('login request error = ', error)
-      });
+      })
+      .addCase(readUserData.fulfilled, (state, action) => {
+        state.userData = action.payload
+      })
+      .addCase(readUserData.rejected, (_state, {error}) => {
+        console.log('readUserData error = ', error)
+      })
   },
 });
 
