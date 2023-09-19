@@ -135,7 +135,7 @@ const SearchScreen: React.FC<ISearchScreenProps> = ({ navigation, route }) => {
                                                     <Image source={item.image} style={styles.imageSize} />
                                                 </View>
                                                 <View style={styles.usersText}>
-                                                    <Text>{item.description}</Text>
+                                                    <Text>{item.userId}</Text>
                                                 </View>
                                             </View>
                                             <Divider horizontalInset={true} />

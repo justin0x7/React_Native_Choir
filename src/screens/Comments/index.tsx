@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
     FlatList,
     Image,
@@ -24,28 +24,50 @@ const Ellipse7 = require('../../assets/images/Ellipse2.png');
 const Ellipse8 = require('../../assets/images/Ellipse3.png');
 const Ellipse9 = require('../../assets/images/Ellipse4.png');
 const Ellipse10 = require('../../assets/images/Ellipse5.png');
+import { readCommentData } from '../../store/slices/comment.slice';
 import SendMessage from '../../assets/images/SendMessage.svg';
 import ThreeDots from '../../assets/images/Dots.svg';
 import VectorRight1 from '../../assets/images/VectorRight1.svg';
 import SubComment from '../../assets/images/ReplyIcon.svg';
+import { useSelector } from 'react-redux';
+import { store, type RootState } from '../../store';
+import { readUserData } from '../../store/slices/user.slice';
+import { AsyncThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
+import { AnyAction, Dispatch } from 'redux';
+import { IArticleSlice } from '../../types/slices/article';
+import { ICommentSlice } from '../../types/slices/comment';
+import { IUserSlice } from '../../types/slices/user';
 
 const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => {
+    const commentData = useSelector((state: RootState) => state.comment.commentData)
+    const userData = useSelector((state: RootState) => state.user.userData)
+    const dispatch = store.dispatch
+
     const [message, setMessage] = useState('');
     const [replyMessage, setReplyMessage] = useState('');
     const [dotStatus, setDotStatus] = useState<number | null>(null);
     const [showStatus, setShowStatus] = useState<number | null>(null);
     const [showReply, setShowReply] = useState(false);
     const [subMessage, setSubMessage] = useState(false);
+    const [makeFollowId, setMakeFollowId] = useState(0);
+    const [goToEdit, setGoToEdit] = useState(false);
+    const [copyMessage, setCopyMessage] = useState('');
+    const [keyNumber, setKeyNumber] = useState(0);
     // const dotsRef = useRef<View>(null);
+    useEffect(() => {
+        dispatch(readUserData())
+        dispatch(readCommentData())
+    }, [])
 
     const onPressGotoSearch = () => {
         console.log('on press goto SearchScreen')
         navigation.navigate("SearchScreen");
     }
 
-    const onShowReply = () => {
+    const onShowReply = (key: number) => {
+        setMakeFollowId(key);
         setShowReply(true);
-        setDotStatus(null)
+        setDotStatus(null);
     }
 
     const toggleDots = (key: number) => {
@@ -63,25 +85,20 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
         }
 
     }
+    // data1={data.sort((a, b) => {
+    //     if (a.followId === b.key) {
+    //       return 1; // Move a before b
+    //     } else if (b.followId === a.key) {
+    //       return -1; // Move b before a
+    //     } else {
+    //       return 0; // Don't change order
+    //     }
+    //   })}
 
-    const [data, setData] = useState([
-        { followId: 0, updateHeart: false, sum: 5, key: 1, name: 'MetaCoffee', image: Ellipse6, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
-        { followId: 0, updateHeart: false, sum: 29, key: 2, name: 'MetaCoffee', image: Ellipse7, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
-        { followId: 0, updateHeart: false, sum: 4, key: 3, name: 'Jillian', image: Ellipse8, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
-        { followId: 0, updateHeart: false, sum: 9, key: 4, name: 'Jimmy', image: Ellipse9, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
-        { followId: 0, updateHeart: false, sum: 0, key: 5, name: 'Julie', image: Ellipse10, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
-        { followId: 0, updateHeart: false, sum: 12, key: 6, name: 'Devin', image: Ellipse1, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
-        { followId: 0, updateHeart: false, sum: 54, key: 7, name: 'Dan', image: Ellipse2, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
-        { followId: 0, updateHeart: false, sum: 2, key: 8, name: 'Dominic', image: Ellipse3, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
-        { followId: 0, updateHeart: false, sum: 1, key: 9, name: 'Jackson', image: Ellipse4, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
-        { followId: 0, updateHeart: false, sum: 1, key: 10, name: 'James', image: Ellipse5, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
-        { followId: 0, updateHeart: false, sum: 3, key: 11, name: 'Devin', image: Ellipse1, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
-        { followId: 0, updateHeart: false, sum: 7, key: 12, name: 'Dan', image: Ellipse2, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
-        { followId: 0, updateHeart: false, sum: 16, key: 13, name: 'Dominic', image: Ellipse3, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
-        { followId: 0, updateHeart: false, sum: 22, key: 14, name: 'Jackson', image: Ellipse4, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
-        { followId: 0, updateHeart: false, sum: 4, key: 15, name: 'James', image: Ellipse5, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse...' },
-        // ... other data items
-    ]);
+    const [data, setData] = useState(
+        commentData
+    );
+
     const onPressHeart = (keyNum: Number) => {
         const newData = [...data];
         const index = newData.findIndex((i) => i.key === keyNum);
@@ -90,13 +107,38 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
         setData(newData);
     };
 
+    const onDeleteItem = (key: number) => {
+        const newData = data.filter(item => item.key !== key);
+        setData(newData);
+    }
+
+    const onEditItem = (key: number, updatedDescription: string) => {
+        setKeyNumber(key);
+        setGoToEdit(true);
+        setCopyMessage(updatedDescription);
+    }
+
+    const onUpdateMessage = () => {
+        const newData = data.map(item => {
+            if (item.key === keyNumber) {
+                return {
+                    ...item,
+                    description: copyMessage
+                };
+            }
+            return item;
+        });
+        setData(newData);
+        setCopyMessage('')
+    }
+
     const onSendMessage = () => {
         if (message) {
             const newMessage = {
                 sum: 0,
                 key: data.length + 1,
-                name: 'MetaCoffee',
-                image: Ellipse5,
+                name: userData[0].userId,
+                image: userData[0].image,
                 description: message,
                 updateHeart: false,
                 followId: 0
@@ -104,6 +146,7 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
             setData([...data, newMessage]);
             setMessage('');
         }
+        console.log("followId:, key:", makeFollowId, data.length)
     }
 
     const onReplyMessage = () => {
@@ -111,17 +154,27 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
             const newMessage = {
                 sum: 0,
                 key: data.length + 1,
-                name: 'MetaCoffee',
-                image: Ellipse5,
+                name: userData[0].userId,
+                image: userData[0].image,
                 description: replyMessage,
                 updateHeart: false,
-                followId: 2
+                followId: makeFollowId
             };
             setData([...data, newMessage]);
+            // data.sort((a, b) => {
+            //     if (a.followId === b.key) {
+            //       return 1; // Move a before b
+            //     } else if (b.followId === a.key) {
+            //       return -1; // Move b before a
+            //     } else {
+            //       return 0; // Don't change order
+            //     }
+            //   })
             setReplyMessage('');
             setSubMessage(!subMessage);
             setShowReply(!showReply);
         }
+        console.log("followId:, key:", makeFollowId, data.length)
     }
 
     return (
@@ -144,6 +197,15 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
                         <View>
                             <View>
                                 <FlatList
+                                    // data={data.sort(function compare(a, b) {
+                                    //     if (a.followId === b.key && b.followId !== a.key) {
+                                    //       return 1; // Move a after b if a's followId matches b's key
+                                    //     } else if (b.followId === a.key && a.followId !== b.key) {
+                                    //       return -1; // Move b after a if b's followId matches a's key
+                                    //     } else {
+                                    //       return a.key - b.key; // Sort by key if no match found
+                                    //     }
+                                    //   })}
                                     data={data}
                                     renderItem={({ item }) => (
                                         <>
@@ -162,10 +224,8 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
                                                                 <Text>{item.description}</Text>
                                                             )} */}
                                                         <Text style={styles.fontColor} numberOfLines={6}>{item.description}</Text>
-                                                        {item.followId === item.key && (
-                                                            <Text style={styles.fontColor} numberOfLines={6}>{item.description}</Text>
-                                                        )}
-                                                        {item.name === "MetaCoffee" ? (
+
+                                                        {item.name === userData[0].userId ? (
                                                             <>
                                                                 <TouchableOpacity style={styles.dots} onPress={() => toggleDots(item.key)} activeOpacity={0.5} >
                                                                     <ThreeDots />
@@ -173,12 +233,12 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
                                                                 {item.key &&
                                                                     dotStatus === item.key ? (
                                                                     <View style={styles.options}>
-                                                                        <TouchableOpacity>
+                                                                        <TouchableOpacity onPress={() => onEditItem(item.key, item.description)} activeOpacity={0.5}>
                                                                             <Text style={styles.fontColor}>
                                                                                 Edit
                                                                             </Text>
                                                                         </TouchableOpacity>
-                                                                        <TouchableOpacity>
+                                                                        <TouchableOpacity onPress={() => onDeleteItem(item.key)} activeOpacity={0.5}>
                                                                             <Text style={styles.delete}>
                                                                                 Delete
                                                                             </Text>
@@ -197,7 +257,7 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
                                                                 {item.key &&
                                                                     dotStatus === item.key ? (
                                                                     <View style={styles.options1}>
-                                                                        <TouchableOpacity activeOpacity={0.5} onPress={onShowReply}>
+                                                                        <TouchableOpacity activeOpacity={0.5} onPress={() => onShowReply(item.key)}>
                                                                             <Text style={styles.fontColor}>
                                                                                 Reply
                                                                             </Text>
@@ -234,10 +294,7 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
                                                         <Text>{item.description}</Text>
                                                     )} */}
                                                         <Text style={styles.fontColor} numberOfLines={6}>{item.description}</Text>
-                                                        {item.followId === item.key && (
-                                                            <Text style={styles.fontColor} numberOfLines={6}>{item.description}</Text>
-                                                        )}
-                                                        {item.name === "MetaCoffee" ? (
+                                                        {item.name === userData[0].userId ? (
                                                             <>
                                                                 <TouchableOpacity style={styles.dots} onPress={() => toggleDots(item.key)} activeOpacity={0.5} >
                                                                     <ThreeDots />
@@ -245,12 +302,12 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
                                                                 {item.key &&
                                                                     dotStatus === item.key ? (
                                                                     <View style={styles.options}>
-                                                                        <TouchableOpacity>
+                                                                        <TouchableOpacity onPress={() => onEditItem(item.key, item.description)} activeOpacity={0.5}>
                                                                             <Text style={styles.fontColor}>
                                                                                 Edit
                                                                             </Text>
                                                                         </TouchableOpacity>
-                                                                        <TouchableOpacity>
+                                                                        <TouchableOpacity onPress={() => onDeleteItem(item.key)} activeOpacity={0.5}>
                                                                             <Text style={styles.delete}>
                                                                                 Delete
                                                                             </Text>
@@ -269,7 +326,7 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
                                                                 {item.key &&
                                                                     dotStatus === item.key ? (
                                                                     <View style={styles.options1}>
-                                                                        <TouchableOpacity activeOpacity={0.5} onPress={onShowReply}>
+                                                                        <TouchableOpacity activeOpacity={0.5} onPress={() => onShowReply(item.key)}>
                                                                             <Text style={styles.fontColor}>
                                                                                 Reply
                                                                             </Text>
@@ -292,7 +349,7 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
                                                     </View>
                                                 </View>
                                             )}
-                                           
+
                                         </>
                                     )}
                                 />
@@ -330,19 +387,36 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
                 <></>
             )}
 
-            <View style={styles.sendMessage}>
-                <TextInput
-                    numberOfLines={8}
-                    multiline
-                    placeholder="Add a comment..."
-                    textAlignVertical="top"
-                    value={message}
-                    onChangeText={setMessage}
-                />
-                <TouchableOpacity activeOpacity={0.5} onPress={() => onSendMessage()}>
-                    <SendMessage style={styles.sendMessageIcon} />
-                </TouchableOpacity>
-            </View>
+            {!goToEdit ? (
+                <View style={styles.sendMessage}>
+                    <TextInput
+                        numberOfLines={8}
+                        multiline
+                        placeholder="Add a comment..."
+                        textAlignVertical="top"
+                        value={message}
+                        onChangeText={setMessage}
+                    />
+                    <TouchableOpacity activeOpacity={0.5} onPress={() => onSendMessage()}>
+                        <SendMessage style={styles.sendMessageIcon} />
+                    </TouchableOpacity>
+                </View>
+            ) : (
+                <View style={styles.sendMessage}>
+                    <TextInput
+                        numberOfLines={8}
+                        multiline
+                        placeholder="Add a comment..."
+                        textAlignVertical="top"
+                        value={copyMessage}
+                        onChangeText={setCopyMessage}
+                    />
+                    <TouchableOpacity activeOpacity={0.5} onPress={() => onUpdateMessage()}>
+                        <SendMessage style={styles.sendMessageIcon} />
+                    </TouchableOpacity>
+                </View>
+            )}
+
             <Footer
                 onSearch={onPressGotoSearch}
             />
@@ -351,3 +425,7 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
 }
 
 export default CommentScreen;
+
+function dispatch(arg0: AsyncThunkAction<any, void, { state: { user: IUserSlice; article: IArticleSlice; comment: ICommentSlice; }; dispatch: ThunkDispatch<{ user: IUserSlice; article: IArticleSlice; comment: ICommentSlice; }, undefined, AnyAction> & Dispatch<AnyAction>; extra?: unknown; rejectValue?: unknown; serializedErrorType?: unknown; pendingMeta?: unknown; fulfilledMeta?: unknown; rejectedMeta?: unknown; }>) {
+    throw new Error('Function not implemented.');
+}
