@@ -53,11 +53,21 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
     const [goToEdit, setGoToEdit] = useState(false);
     const [copyMessage, setCopyMessage] = useState('');
     const [keyNumber, setKeyNumber] = useState(0);
-    // const dotsRef = useRef<View>(null);
+
     useEffect(() => {
         dispatch(readUserData())
         dispatch(readCommentData())
     }, [])
+
+    const onPressGotoHome = () => {
+        console.log('on press goto HomeScreen');
+        navigation.navigate("HomeScreen");
+      }
+    
+      const onPressGotoProfile = () => {
+        console.log('on press goto ProfileScreen');
+        navigation.navigate("ProfileScreen");
+      }
 
     const onPressGotoSearch = () => {
         console.log('on press goto SearchScreen')
@@ -99,12 +109,26 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
         commentData
     );
 
-    const onPressHeart = (keyNum: Number) => {
+    const onPressHeart = (keyNum: number) => {
+        // const newData = [...data];
+        // const index = newData.findIndex((i) => i.key === keyNum);
+        // newData[index].updateHeart = !newData[index].updateHeart
+        // newData[index].sum += newData[index].updateHeart ? 1 : -1;
+        // setData(newData);
+        // console.log(newData)
+
         const newData = [...data];
         const index = newData.findIndex((i) => i.key === keyNum);
-        newData[index].updateHeart = !newData[index].updateHeart
-        newData[index].sum += newData[index].updateHeart ? 1 : -1;
+        const item = newData[index];
+        const newUpdateHeart = !item.updateHeart;
+        const newSum = item.sum + (newUpdateHeart ? 1 : -1);
+        newData[index] = {
+          ...item,
+          updateHeart: newUpdateHeart,
+          sum: newSum
+        };
         setData(newData);
+        console.log(newData);
     };
 
     const onDeleteItem = (key: number) => {
@@ -419,6 +443,8 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
 
             <Footer
                 onSearch={onPressGotoSearch}
+                onHome={onPressGotoHome}
+                onProfile={onPressGotoProfile}
             />
         </>
     );

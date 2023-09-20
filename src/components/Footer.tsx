@@ -10,6 +10,8 @@ const bookIcon = require('../assets/images/book.png');
 
 interface Props {
     onSearch: any;
+    onHome: any;
+    onProfile: any;
 }
 
 const Footer = (props: Props) => {
@@ -26,7 +28,7 @@ const Footer = (props: Props) => {
 
     return (
         <View style={styles.background}>
-            <TouchableOpacity activeOpacity={0.5}>
+            <TouchableOpacity activeOpacity={0.5} onPress={props.onHome}>
                 <Image
                     style={styles.houseStyle}
                     source={houseIcon}
@@ -44,7 +46,7 @@ const Footer = (props: Props) => {
                     source={magicIcon}
                 />
             </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.5}>
+            <TouchableOpacity activeOpacity={0.5} onPress={props.onProfile}>
                 <Image
                     style={styles.houseStyle}
                     source={bookIcon}

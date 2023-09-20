@@ -40,6 +40,16 @@ const SearchScreen: React.FC<ISearchScreenProps> = ({ navigation, route }) => {
         dispatch(readArticleData())
     }, [])
 
+    const onPressGotoHome = () => {
+        console.log('on press goto HomeScreen');
+        navigation.navigate("HomeScreen");
+      }
+    
+      const onPressGotoProfile = () => {
+        console.log('on press goto ProfileScreen');
+        navigation.navigate("ProfileScreen");
+      }
+
     // const FirstRoute = () => (
     //     // <View style={{ backgroundColor: 'white' }} />
     //     <Text style={styles.Tab}>
@@ -149,6 +159,8 @@ const SearchScreen: React.FC<ISearchScreenProps> = ({ navigation, route }) => {
             <GoToPrev />
             <Footer
                 onSearch={onPressGotoSearch}
+                onHome={onPressGotoHome}
+                onProfile={onPressGotoProfile}
             />
         </>
     );

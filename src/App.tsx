@@ -8,12 +8,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { Provider } from 'react-redux';
-import ArticleScreen from './screens/Articles';
-import CommentScreen from './screens/Comments';
+import ArticleScreen from './screens/ArticlesScreen';
+import CommentScreen from './screens/CommentsScreen';
 import DetailScreen from './screens/DetailScreen';
 import HomeScreen from "./screens/HomeScreen";
-import SearchScreen from "./screens/Search"
-import CurrentChannelsScreen from "./screens/Channels"
+import SearchScreen from "./screens/SearchScreen"
+import ProfileScreen from "./screens/ProfileScreen"
 import { store } from './store';
 import { IRouterParamList } from './types/router';
 
@@ -49,33 +49,11 @@ const App: React.FC = () => {
             component={SearchScreen}
             options={{ headerShown: false }}
           />
-          {/* Message Chat */}
-          {/* <Stack.Screen
-            name="CurrentChannelsScreen"
-            component={CurrentChannelsScreen}
+          <Stack.Screen
+            name="ProfileScreen"
+            component={ProfileScreen}
             options={{ headerShown: false }}
-          /> */}
-          {/* <Stack.Screen
-            name="Chat"
-            component={ChatScreen}
-            options={({ navigation }) => ({
-              title: currentChannel?.name || "Chat",
-              headerBackTitle: "",
-              headerRight: () => (
-                <TouchableOpacity onPress={() => navigation.navigate("Members")}>
-                  <Octicons name="people" size={24} color={isDark ? "#fff" : "#2a2a39"} />
-                </TouchableOpacity>
-              ),
-            })}
-          /> */}
-          {/* <Stack.Screen
-            name="Members"
-            component={ChannelMembersScreen}
-            options={{
-              title: currentChannel?.name || "Members",
-              headerBackTitle: "",
-            }}
-          /> */}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

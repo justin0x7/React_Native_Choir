@@ -22,6 +22,16 @@ const ReadArticle: React.FC<IArticleScreenProps> = ({ navigation, route }) => {
         navigation.navigate("SearchScreen");
     }
 
+    const onPressGotoHome = () => {
+        console.log('on press goto HomeScreen');
+        navigation.navigate("HomeScreen");
+      }
+    
+      const onPressGotoProfile = () => {
+        console.log('on press goto ProfileScreen');
+        navigation.navigate("ProfileScreen");
+      }
+
     return (
         <>
             <View style={styles.mainContainer}>
@@ -85,6 +95,8 @@ const ReadArticle: React.FC<IArticleScreenProps> = ({ navigation, route }) => {
                 onComment={onPressGotoComments} />
             <Footer
                 onSearch={onPressGotoSearch}
+                onHome={onPressGotoHome}
+                onProfile={onPressGotoProfile}
             />
         </>
     );

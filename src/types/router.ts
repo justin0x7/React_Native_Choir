@@ -9,6 +9,7 @@ export type IRouterParamList = {
   CurrentChannelsScreen: undefined;
   ChatScreen: undefined;
   SearchScreen: undefined;
+  ProfileScreen: undefined;
   // ExerciseScreen: { started: boolean };
 };
 
@@ -56,26 +57,15 @@ export type ICommentScreenProps = {
   route: ICommentScreenRouteProp;
 };
 
-// CurrentChannelsScreen
-type ICurrentChannelsScreenRouteProp = RouteProp<IRouterParamList, 'CurrentChannelsScreen'>;
-type ICurrentChannelsScreenNavigationProp = StackNavigationProp<
+// ProfileScreen
+type IProfileScreenRouteProp = RouteProp<IRouterParamList, 'ProfileScreen'>;
+type IProfileScreenNavigationProp = StackNavigationProp<
   IRouterParamList,
-  'CurrentChannelsScreen'
+  'ProfileScreen'
 >;
-export type ICurrentChannelsScreenProps = {
-  navigation: ICurrentChannelsScreenNavigationProp;
-  route: ICurrentChannelsScreenRouteProp;
-};
-
-// ChatScreen
-type IChatScreenRouteProp = RouteProp<IRouterParamList, 'ChatScreen'>;
-type IChatScreenNavigationProp = StackNavigationProp<
-  IRouterParamList,
-  'ChatScreen'
->;
-export type IChatScreenProps = {
-  navigation: IChatScreenNavigationProp;
-  route: IChatScreenRouteProp;
+export type IProfileScreenProps = {
+  navigation: IProfileScreenNavigationProp;
+  route: IProfileScreenRouteProp;
 };
 
 // SearchScreen
