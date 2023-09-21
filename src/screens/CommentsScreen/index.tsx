@@ -462,6 +462,6 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
 
 export default CommentScreen;
 
-function dispatch(arg0: AsyncThunkAction<any, void, { state: { user: IUserSlice; article: IArticleSlice; comment: ICommentSlice; }; dispatch: ThunkDispatch<{ user: IUserSlice; article: IArticleSlice; comment: ICommentSlice; }, undefined, AnyAction> & Dispatch<AnyAction>; extra?: unknown; rejectValue?: unknown; serializedErrorType?: unknown; pendingMeta?: unknown; fulfilledMeta?: unknown; rejectedMeta?: unknown; }>) {
-    throw new Error('Function not implemented.');
-}
+// function dispatch(arg0: AsyncThunkAction<any, void, { state: { user: IUserSlice; article: IArticleSlice; comment: ICommentSlice; }; dispatch: ThunkDispatch<{ user: IUserSlice; article: IArticleSlice; comment: ICommentSlice; }, undefined, AnyAction> & Dispatch<AnyAction>; extra?: unknown; rejectValue?: unknown; serializedErrorType?: unknown; pendingMeta?: unknown; fulfilledMeta?: unknown; rejectedMeta?: unknown; }>) {
+//     throw new Error('Function not implemented.');
+// }

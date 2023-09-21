@@ -26,7 +26,7 @@ const SearchScreen: React.FC<ISearchScreenProps> = ({ navigation, route }) => {
     const articleData = useSelector((state: RootState) => state.article.articleData)
     const dispatch = store.dispatch
 
-    const [toggleTab, setToggleTab] = useState('');
+    const [toggleTab, setToggleTab] = useState("Articles");
     const SetToggleArticles = () => {
         setToggleTab('Articles');
     }
@@ -43,17 +43,17 @@ const SearchScreen: React.FC<ISearchScreenProps> = ({ navigation, route }) => {
     const onPressGotoHome = () => {
         console.log('on press goto HomeScreen');
         navigation.navigate("HomeScreen");
-      }
-    
-      const onPressGotoProfile = () => {
+    }
+
+    const onPressGotoProfile = () => {
         console.log('on press goto ProfileScreen');
         navigation.navigate("ProfileScreen");
-      }
+    }
 
-      const onGoToCategory = (page: string) => {
+    const onGoToCategory = (page: string) => {
         console.log('on press goto Business');
-        navigation.navigate("CategoryScreen", {page});
-      }
+        navigation.navigate("CategoryScreen", { page });
+    }
     // const FirstRoute = () => (
     //     // <View style={{ backgroundColor: 'white' }} />
     //     <Text style={styles.Tab}>
@@ -73,12 +73,49 @@ const SearchScreen: React.FC<ISearchScreenProps> = ({ navigation, route }) => {
         navigation.navigate("SearchScreen");
     }
 
-    const [searchQuery, setSearchQuery] = useState<string>('');
+    const [searchQuery, setSearchQuery] = useState('');
 
-    const onChangeSearch = (query: string) => setSearchQuery(query);
+    const renderArticleItem = ({ item }: any) => {
+        if (!item.description.toLowerCase().includes(searchQuery.toLowerCase())) {
+            return null;
+        }
+
+        return (
+            <>
+                <View style={styles.articleLine}>
+                    <View>
+                        <Image style={styles.image} source={item.image} />
+                    </View>
+                    <View style={styles.articleText}>
+                        <Text>{item.description}</Text>
+                    </View>
+                </View>
+                <Divider />
+            </>
+        );
+    };
+
+    const renderUsersItem = ({ item }: any) => {
+        if (!item.userId.toLowerCase().includes(searchQuery.toLowerCase())) {
+            return null;
+        }
+
+        return (
+            <>
+                <View style={styles.userLine}>
+                    <View>
+                        <Image source={item.image} style={styles.imageSize} />
+                    </View>
+                    <View style={styles.usersText}>
+                        <Text>{item.userId}</Text>
+                    </View>
+                </View>
+                <Divider horizontalInset={true} />
+            </>
+        );
+    };
 
     // const layout = useWindowDimensions();
-
     // const [index, setIndex] = React.useState(0);
     // const [routes] = React.useState([
     //     { key: 'first', title: 'Articles' },
@@ -97,7 +134,7 @@ const SearchScreen: React.FC<ISearchScreenProps> = ({ navigation, route }) => {
                     <View style={styles.searchBar}>
                         <Searchbar
                             placeholder="Search"
-                            onChangeText={onChangeSearch}
+                            onChangeText={text => setSearchQuery(text)}
                             value={searchQuery}
                             icon="false"
                             iconColor='white'
@@ -121,40 +158,36 @@ const SearchScreen: React.FC<ISearchScreenProps> = ({ navigation, route }) => {
                     </View>
                     <Divider bold={true} />
                     <View>
-                        {toggleTab === 'Articles' ?
-                            (<FlatList
-                                data={articleData}
-                                renderItem={({ item }) => (
-                                    <>
-                                        <View style={styles.articleLine}>
-                                            <View>
-                                                <Image style={styles.image} source={item.image} />
-                                            </View>
-                                            <View style={styles.articleText}>
-                                                <Text>{item.description}</Text> 
-                                            </View>
-                                        </View>
-                                        <Divider />
-                                    </>
-                                )}
-                            />)
-                             :
-                              (
+                        {toggleTab !== 'Users' ?
+                            (
+                                // <FlatList
+                                //     data={articleData}
+                                //     renderItem={({ item }) => (
+                                //         <>
+                                //             <View style={styles.articleLine}>
+                                //                 <View>
+                                //                     <Image style={styles.image} source={item.image} />
+                                //                 </View>
+                                //                 <View style={styles.articleText}>
+                                //                     <Text>{item.description}</Text> 
+                                //                 </View>
+                                //             </View>
+                                //             <Divider />
+                                //         </>
+                                //     )}
+                                // />
+                                <FlatList
+                                    data={articleData}
+                                    renderItem={({ item }) => renderArticleItem({ item })}
+                                    keyExtractor={item => item.toString()}
+                                />
+                            )
+                            :
+                            (
                                 <FlatList
                                     data={userData}
-                                    renderItem={({ item }) => (
-                                        <>
-                                            <View style={styles.userLine}>
-                                                <View>
-                                                    <Image source={item.image} style={styles.imageSize} />
-                                                </View>
-                                                <View style={styles.usersText}>
-                                                    <Text>{item.userId}</Text>
-                                                </View>
-                                            </View>
-                                            <Divider horizontalInset={true} />
-                                        </>
-                                    )}
+                                    renderItem={({ item }) => renderUsersItem({ item })}
+                                    keyExtractor={item => item.toString()}
                                 />
                             )}
                     </View>

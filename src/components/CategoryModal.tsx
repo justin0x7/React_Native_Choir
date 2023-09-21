@@ -15,7 +15,7 @@ interface Props {
   onCulture: any;
   onWorld: any;
   onUSA: any;
-  onRequestClose: any;
+  // onRequestClose: any;
   // onOutsidePress: any;
 }
 
@@ -23,7 +23,7 @@ const CategoryModal = (props: Props) => {
     
     return (
         <>
-           <Modal visible={props.visible} animationType="fade" transparent={true} onRequestClose={props.onRequestClose}>
+           <Modal visible={props.visible} animationType="fade" transparent={true} >
            {/* <TouchableWithoutFeedback onPress={props.onOutsidePress}> */}
                 <View style={styles.modal}>
                 </View>

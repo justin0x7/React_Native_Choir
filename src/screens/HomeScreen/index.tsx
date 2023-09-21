@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Image,
   ImageBackground,
@@ -10,11 +10,14 @@ import Footer from '../../components/Footer';
 import SideMenu from '../../components/SideMenu';
 import { IHomeScreenProps } from '../../types/router';
 import styles from "./styles";
+import { useIsFocused } from '@react-navigation/native';
 const homeImage = require('../../assets/images/Home.png');
 const homeTitle = require('../../assets/images/HomeTitle.png');
 
 
 const HomeScreen: React.FC<IHomeScreenProps> = ({ navigation, route }) => {
+ 
+
   const onPressGotoArticle = () => {
     console.log('on press goto ArticleScreen');
     navigation.navigate("ArticleScreen");

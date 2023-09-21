@@ -7,7 +7,7 @@ export type UserType = {
   userId: string
 }
 export type ArticleType = {
-  name: string,
+  // name: string,
   image: any,
   description: string
   category: string

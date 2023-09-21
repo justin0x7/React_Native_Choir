@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, Modal, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import Cross from '../assets/images/Cross.svg';
 import AppColors from '../config/colors';
 import { Metrics, scale } from '../config/dimentions';
 import CategoryModal from './CategoryModal';
+import { useIsFocused } from '@react-navigation/native';
 const houseIcon = require('../assets/images/house.png');
 const searchIcon = require('../assets/images/search.png');
 const magicIcon = require('../assets/images/magic.png');
@@ -21,6 +22,17 @@ interface Props {
 }
 
 const Footer = (props: Props) => {
+    const isFocused = useIsFocused();
+
+    const [refreshKey, setRefreshKey] = useState(0);
+  
+    useEffect(() => {
+      if (isFocused) {
+        // Increment the refresh key to trigger a screen refresh
+        setModalVisible(false);
+        setRefreshKey(prevKey => prevKey - 1);
+      }
+    }, [isFocused]);
     const [modalVisible, setModalVisible] = useState(false);
 
     const openCategoryModal = () => {
@@ -31,16 +43,12 @@ const Footer = (props: Props) => {
         setModalVisible(false);
     }
 
-    const onRequestClose = () => {
-        setModalVisible(false);
-    }
-
-    const onOutsidePress = () => {
-        onRequestClose();
-    }
+    // const onRequestClose = () => {
+    //     setModalVisible(false);
+    // }
 
     return (
-        <View style={styles.background}>
+        <View style={styles.background} key={refreshKey}>
             <TouchableOpacity activeOpacity={0.5} onPress={props.onHome}>
                 <Image
                     style={styles.houseStyle}
@@ -66,7 +74,7 @@ const Footer = (props: Props) => {
                 />
             </TouchableOpacity>
             <CategoryModal
-                onRequestClose={onRequestClose}
+                // onRequestClose={onRequestClose}
                 // onOutsidePress={onOutsidePress}
                 visible={modalVisible}
                 onPress={closeCategoryModal}
