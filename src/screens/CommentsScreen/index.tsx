@@ -201,6 +201,11 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
         console.log("followId:, key:", makeFollowId, data.length)
     }
 
+    const onGoToCategory = (page: string) => {
+        console.log('on press goto Business');
+        navigation.navigate("CategoryScreen", {page});
+      }
+
     return (
         <>
             <View style={styles.mainContainer}>
@@ -441,10 +446,15 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
                 </View>
             )}
 
-            <Footer
+<Footer
                 onSearch={onPressGotoSearch}
                 onHome={onPressGotoHome}
                 onProfile={onPressGotoProfile}
+                onGoToBusiness={() => onGoToCategory('Business')}
+                onCulture={() => onGoToCategory('Culture')}
+                onSports={() => onGoToCategory('Sports')}
+                onUSA={() => onGoToCategory('USA')}
+                onWorld={() => onGoToCategory('World')}
             />
         </>
     );

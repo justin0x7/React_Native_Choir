@@ -10,6 +10,7 @@ export type IRouterParamList = {
   ChatScreen: undefined;
   SearchScreen: undefined;
   ProfileScreen: undefined;
+  CategoryScreen: { page: string };
   // ExerciseScreen: { started: boolean };
 };
 
@@ -77,4 +78,15 @@ type ISearchScreenNavigationProp = StackNavigationProp<
 export type ISearchScreenProps = {
   navigation: ISearchScreenNavigationProp;
   route: ISearchScreenRouteProp;
+};
+
+// CategoryScreen
+type ICategoryScreenRouteProp = RouteProp<IRouterParamList, 'CategoryScreen'>;
+type ICategoryScreenNavigationProp = StackNavigationProp<
+  IRouterParamList,
+  'CategoryScreen'
+>;
+export type ICategoryScreenProps = {
+  navigation: ICategoryScreenNavigationProp;
+  route: ICategoryScreenRouteProp;
 };

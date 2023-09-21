@@ -1,13 +1,18 @@
-const Ellipse1 = require('./images/Ellipse1.png');
-const Ellipse2 = require('./images/Ellipse2.png');
-const Ellipse3 = require('./images/Ellipse3.png');
-const Ellipse4 = require('./images/Ellipse4.png');
-const Ellipse5 = require('./images/Ellipse5.png');
-const Ellipse6 = require('./images/Ellipse1.png');
-const Ellipse7 = require('./images/Ellipse2.png');
-const Ellipse8 = require('./images/Ellipse3.png');
-const Ellipse9 = require('./images/Ellipse4.png');
-const Ellipse10 = require('./images/Ellipse5.png');
+const Ellipse1 = require('./images/Screen1.png');
+const Ellipse2 = require('./images/Screen2.png');
+const Ellipse3 = require('./images/Screen1.png');
+const Ellipse4 = require('./images/Screen2.png');
+const Ellipse5 = require('./images/Screen3.png');
+const Ellipse6 = require('./images/Screen4.png');
+const Ellipse7 = require('./images/Screen1.png');
+const Ellipse8 = require('./images/Screen2.png');
+const Ellipse9 = require('./images/Screen3.png');
+const Ellipse10 = require('./images/Screen4.png');
+const Ellipse11 = require('./images/Screen1.png');
+const Ellipse12 = require('./images/Screen2.png');
+const Ellipse13 = require('./images/Screen3.png');
+const Ellipse14 = require('./images/Screen4.png');
+
 
 export const testUserData = [
     { key: 1, name: 'Joel', image: Ellipse6, userId: 'lukasiwai000' },
@@ -25,19 +30,37 @@ export const testUserData = [
     { key: 13, name: 'Dominic', image: Ellipse3, userId: 'applecake' },
     { key: 14, name: 'Jackson', image: Ellipse4, userId: 'metacoffee' },
     { key: 15, name: 'James', image: Ellipse5, userId: 'septwolf' },
+    { key: 16, name: 'James', image: Ellipse11, userId: 'septwolf' },
+    { key: 17, name: 'James', image: Ellipse12, userId: 'septwolf' },
+    { key: 18, name: 'James', image: Ellipse13, userId: 'septwolf' },
+
 ]
 
 export const testArticleData = [
-{ key: 1, name: 'Joel', image: Ellipse6, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt' },
-{ key: 2, name: 'John', image: Ellipse7, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt' },
-{ key: 3, name: 'Jillian', image: Ellipse8, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt' },
-{ key: 4, name: 'Jimmy', image: Ellipse9, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt' },
-{ key: 5, name: 'Julie', image: Ellipse10, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt' },
-{ key: 6, name: 'Devin', image: Ellipse1, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt' },
-{ key: 7, name: 'Dan', image: Ellipse2, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt' },
-{ key: 8, name: 'Dominic', image: Ellipse3, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt' },
-{ key: 9, name: 'Jackson', image: Ellipse4, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt' },
-{ key: 10, name: 'James', image: Ellipse5, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt' },
+{ key: 1,  image: Ellipse6, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'USA' },
+{ key: 2,  image: Ellipse7, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'Art' },
+{ key: 3,  image: Ellipse8, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'Art' },
+{ key: 4,  image: Ellipse9, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'Art' },
+{ key: 5,  image: Ellipse10, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'Art' },
+{ key: 6,  image: Ellipse1, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'Culture' },
+{ key: 7,  image: Ellipse2, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'Culture' },
+{ key: 8,  image: Ellipse3, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'Sports' },
+{ key: 9,  image: Ellipse4, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'World' },
+{ key: 10,  image: Ellipse5, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'Business' },
+{ key: 11,  image: Ellipse6, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'USA' },
+{ key: 12,  image: Ellipse7, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'Art' },
+{ key: 13,  image: Ellipse8, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'Art' },
+{ key: 14,  image: Ellipse9, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'Art' },
+{ key: 15,  image: Ellipse10, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'Art' },
+{ key: 16,  image: Ellipse1, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'Culture' },
+{ key: 17,  image: Ellipse2, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'Culture' },
+{ key: 18,  image: Ellipse3, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'Sports' },
+{ key: 19,  image: Ellipse4, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'World' },
+{ key: 20,  image: Ellipse5, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'Business' },
+{ key: 21,  image: Ellipse11, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'Culture' },
+{ key: 22,  image: Ellipse12, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'Sports' },
+{ key: 23,  image: Ellipse13, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'World' },
+{ key: 24,  image: Ellipse14, description: 'Sit amet, consectetur adipiscing sed do eiusmod incididunt', category: 'Business' },
 ]
 
 export const testCommentsData = [

@@ -1,21 +1,21 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 import AppColors from '../../config/colors';
-import { Metrics, scale } from '../../config/dimentions';
-import { FontsFamilies } from '../../config/fonts';
+import {Metrics, scale} from '../../config/dimentions';
+import {FontsFamilies} from '../../config/fonts';
 
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: 'center'
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   content: {
     flex: 1,
     width: Metrics.screenWidth,
-    paddingBottom: scale(90)
+    paddingBottom: scale(90),
   },
   searchTitle: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   searchSubject: {
     paddingTop: scale(30),
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     marginLeft: scale(30),
     marginRight: scale(30),
     fontWeight: '500',
-    color: AppColors.black
+    color: AppColors.black,
   },
   searchBar: {
     paddingBottom: scale(40),
@@ -33,17 +33,17 @@ const styles = StyleSheet.create({
   },
   tabTitle: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-evenly',
   },
   articles: {
     fontSize: scale(15),
     textAlign: 'center',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   users: {
     fontSize: scale(15),
     textAlign: 'center',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   articleLine: {
     flexDirection: 'row',
@@ -72,14 +72,31 @@ const styles = StyleSheet.create({
   imageSize: {
     width: scale(40),
     height: scale(40),
-    borderRadius: scale(20)
+  },
+  arrayImage: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center'
   },
   image: {
-    width: scale(62),
-    height: scale(62),
-    borderRadius: scale(31)
+    width: scale(162),
+    height: scale(269),
+    margin: scale(10),
+    borderRadius: scale(20),
+  },
+  imageText: {
+    alignItems: "center",
+    textAlign: 'center',
+    width: scale(162),
+    position: 'absolute',
+    bottom: scale(9),
+    borderBottomRightRadius: scale(20),
+    borderBottomLeftRadius: scale(20),
+    padding: scale(5)
+  },
+  imageCard: {
+    alignItems: 'center'
   }
 });
 
 export default styles;
-

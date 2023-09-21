@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Image, Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Modal, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import Cross from '../assets/images/Cross.svg';
 import AppColors from '../config/colors';
 import { Metrics, scale } from '../config/dimentions';
+import CategoryModal from './CategoryModal';
 const houseIcon = require('../assets/images/house.png');
 const searchIcon = require('../assets/images/search.png');
 const magicIcon = require('../assets/images/magic.png');
@@ -12,11 +13,15 @@ interface Props {
     onSearch: any;
     onHome: any;
     onProfile: any;
+    onGoToBusiness: any;
+    onSports: any;
+    onCulture: any;
+    onWorld: any;
+    onUSA: any;
 }
 
 const Footer = (props: Props) => {
     const [modalVisible, setModalVisible] = useState(false);
-    const [opacityActive, setOpacityActive] = useState(false);
 
     const openCategoryModal = () => {
         setModalVisible(true);
@@ -26,6 +31,14 @@ const Footer = (props: Props) => {
         setModalVisible(false);
     }
 
+    const onRequestClose = () => {
+        setModalVisible(false);
+    }
+
+    const onOutsidePress = () => {
+        onRequestClose();
+    }
+
     return (
         <View style={styles.background}>
             <TouchableOpacity activeOpacity={0.5} onPress={props.onHome}>
@@ -33,41 +46,36 @@ const Footer = (props: Props) => {
                     style={styles.houseStyle}
                     source={houseIcon}
                 />
-            </TouchableOpacity>
+            </TouchableOpacity >
             <TouchableOpacity activeOpacity={0.5} onPress={props.onSearch}>
                 <Image
                     style={styles.houseStyle}
                     source={searchIcon}
                 />
             </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.5} onPress={openCategoryModal}>
-                <Image
-                    style={styles.houseStyle}
-                    source={magicIcon}
-                />
-            </TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.5} onPress={openCategoryModal}>
+                    <Image
+                        style={styles.houseStyle}
+                        source={magicIcon}
+                    />
+                </TouchableOpacity>
             <TouchableOpacity activeOpacity={0.5} onPress={props.onProfile}>
                 <Image
                     style={styles.houseStyle}
                     source={bookIcon}
                 />
             </TouchableOpacity>
-            <Modal visible={modalVisible} animationType="fade" transparent={true}>
-                <View style={styles.modal}>
-                </View>
-                <TouchableOpacity activeOpacity={0.5} onPress={closeCategoryModal} >
-                    <Text style={styles.cross}>
-                        <Cross width={25} height={25} />
-                    </Text>
-                </TouchableOpacity>
-                <View style={styles.modalContent}>
-                    <Text style={styles.text}>Business</Text>
-                    <Text style={styles.text}>Sports</Text>
-                    <Text style={styles.text}>Culture</Text>
-                    <Text style={styles.text}>World</Text>
-                    <Text style={styles.text}>USA</Text>
-                </View>
-            </Modal>
+            <CategoryModal
+                onRequestClose={onRequestClose}
+                // onOutsidePress={onOutsidePress}
+                visible={modalVisible}
+                onPress={closeCategoryModal}
+                onBusiness={props.onGoToBusiness}
+                onCulture={props.onCulture}
+                onSports={props.onSports}
+                onUSA={props.onUSA}
+                onWorld={props.onWorld}
+            />
         </View>
     );
 };

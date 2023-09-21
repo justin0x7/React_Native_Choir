@@ -53,7 +53,8 @@ const styles = StyleSheet.create({
   commentAvatar: {
     justifyContent: 'center',
     width: scale(27),
-    height: scale(27)
+    height: scale(27),
+    borderRadius:scale(13.5)
   },
   commentContent: {
     paddingLeft: scale(30),

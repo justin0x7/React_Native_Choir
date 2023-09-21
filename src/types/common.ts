@@ -10,6 +10,7 @@ export type ArticleType = {
   name: string,
   image: any,
   description: string
+  category: string
 }
 
 export type CommentType  = { 

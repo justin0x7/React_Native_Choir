@@ -50,6 +50,10 @@ const SearchScreen: React.FC<ISearchScreenProps> = ({ navigation, route }) => {
         navigation.navigate("ProfileScreen");
       }
 
+      const onGoToCategory = (page: string) => {
+        console.log('on press goto Business');
+        navigation.navigate("CategoryScreen", {page});
+      }
     // const FirstRoute = () => (
     //     // <View style={{ backgroundColor: 'white' }} />
     //     <Text style={styles.Tab}>
@@ -124,10 +128,10 @@ const SearchScreen: React.FC<ISearchScreenProps> = ({ navigation, route }) => {
                                     <>
                                         <View style={styles.articleLine}>
                                             <View>
-                                                <Image source={item.image} />
+                                                <Image style={styles.image} source={item.image} />
                                             </View>
                                             <View style={styles.articleText}>
-                                                <Text>{item.description}</Text>
+                                                <Text>{item.description}</Text> 
                                             </View>
                                         </View>
                                         <Divider />
@@ -161,6 +165,11 @@ const SearchScreen: React.FC<ISearchScreenProps> = ({ navigation, route }) => {
                 onSearch={onPressGotoSearch}
                 onHome={onPressGotoHome}
                 onProfile={onPressGotoProfile}
+                onGoToBusiness={() => onGoToCategory('Business')}
+                onCulture={() => onGoToCategory('Culture')}
+                onSports={() => onGoToCategory('Sports')}
+                onUSA={() => onGoToCategory('USA')}
+                onWorld={() => onGoToCategory('World')}
             />
         </>
     );

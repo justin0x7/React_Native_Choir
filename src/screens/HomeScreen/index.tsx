@@ -24,7 +24,7 @@ const HomeScreen: React.FC<IHomeScreenProps> = ({ navigation, route }) => {
     console.log('on press goto CommentScreen');
     navigation.navigate("CommentScreen");
   }
-  
+
   const onPressGotoSearch = () => {
     console.log('on press goto SearchScreen');
     navigation.navigate("SearchScreen");
@@ -38,6 +38,11 @@ const HomeScreen: React.FC<IHomeScreenProps> = ({ navigation, route }) => {
   const onPressGotoProfile = () => {
     console.log('on press goto ProfileScreen');
     navigation.navigate("ProfileScreen");
+  }
+
+  const onGoToCategory = (page: string) => {
+    console.log('on press goto Business');
+    navigation.navigate("CategoryScreen", { page });
   }
 
   return (
@@ -80,6 +85,11 @@ const HomeScreen: React.FC<IHomeScreenProps> = ({ navigation, route }) => {
         onSearch={onPressGotoSearch}
         onHome={onPressGotoHome}
         onProfile={onPressGotoProfile}
+        onGoToBusiness={() => onGoToCategory('Business')}
+        onCulture={() => onGoToCategory('Culture')}
+        onSports={() => onGoToCategory('Sports')}
+        onUSA={() => onGoToCategory('USA')}
+        onWorld={() => onGoToCategory('World')}
       />
     </>
   );

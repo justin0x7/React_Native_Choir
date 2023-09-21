@@ -31,6 +31,11 @@ const ReadArticle: React.FC<IArticleScreenProps> = ({ navigation, route }) => {
         console.log('on press goto ProfileScreen');
         navigation.navigate("ProfileScreen");
       }
+      
+      const onGoToCategory = (page: string) => {
+        console.log('on press goto Business');
+        navigation.navigate("CategoryScreen", {page});
+      }
 
     return (
         <>
@@ -97,6 +102,11 @@ const ReadArticle: React.FC<IArticleScreenProps> = ({ navigation, route }) => {
                 onSearch={onPressGotoSearch}
                 onHome={onPressGotoHome}
                 onProfile={onPressGotoProfile}
+                onGoToBusiness={() => onGoToCategory('Business')}
+                onCulture={() => onGoToCategory('Culture')}
+                onSports={() => onGoToCategory('Sports')}
+                onUSA={() => onGoToCategory('USA')}
+                onWorld={() => onGoToCategory('World')}
             />
         </>
     );

@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     width: Metrics.screenWidth,
-    paddingBottom: scale(90)
+    // paddingBottom: scale(260)
   },
   searchTitle: {
     alignItems: "center",
@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
   },
   userId: {
     textAlign: 'center',
-    color: AppColors.black
+    color: AppColors.black,
+    paddingBottom: scale(20)
   },
   tabTitle: {
     flexDirection: 'row',
@@ -73,8 +74,58 @@ const styles = StyleSheet.create({
   },
   imageSize: {
     width: scale(40),
-    height: scale(40)
+    height: scale(40),
+    borderRadius: scale(20)
   },
+  privacyStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: scale(260)
+  },
+  privacyHeader: {
+    fontSize: scale(30),
+    color: AppColors.black,
+    paddingBottom: scale(20)
+  },
+  privacyContent: {
+    fontSize: scale(16),
+    color: AppColors.black,
+    // textAlign: 'center',
+    justifyContent: 'center',
+    paddingLeft: scale(20),
+    paddingRight: scale(20),
+    alignItems: 'center'
+  },
+  privacySub: {
+    alignItems: 'center'
+
+  },
+  passwordHeader: {
+    fontSize: scale(24),
+    color: AppColors.black,
+    paddingBottom: scale(40),
+    marginTop: scale(40),
+  },
+  passwordChange: {
+    borderWidth: scale(1),
+    borderRadius: scale(20),
+    height: scale(34),
+    width: scale(236),
+    paddingLeft: scale(20),
+  },
+  passwordBox: {
+    paddingBottom: scale(18)
+  },
+  userName: {
+    fontSize: scale(24),
+    color: AppColors.black,
+    textAlign: 'center'
+  },
+  nickName: {
+    fontSize: scale(18),
+    color: AppColors.black,
+    textAlign: 'center'
+  }
 });
 
 export default styles;
