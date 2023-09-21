@@ -4,7 +4,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 export type IRouterParamList = {
   HomeScreen: undefined;
   DetailScreen: undefined;
-  ArticleScreen: undefined;
+  ArticleScreen: { title: string, content: string };
   CommentScreen: undefined;
   CurrentChannelsScreen: undefined;
   ChatScreen: undefined;

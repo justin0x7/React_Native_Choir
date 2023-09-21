@@ -12,6 +12,8 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     width: Metrics.screenWidth,
+    height: Metrics.screenHeight - scale(47),
+
   },
   // title: {
   //   flex: 1,
@@ -31,9 +33,9 @@ const styles = StyleSheet.create({
   text: {
     color: AppColors.white,
     fontSize: scale(40),
-    fontFamily: "American Typewriter" ,
+    // fontFamily: "PlayfairDisplay-Regular" ,
     // fontFamily: FontsFamilies.primary ,
-    fontStyle: 'normal',
+    // fontStyle: 'normal',
     // fontWeight: 'bold',
     lineHeight: scale(50)
   },
@@ -47,7 +49,7 @@ const styles = StyleSheet.create({
   readText: {
     position: 'absolute',
     left: scale(40),
-    bottom: scale(80),
+    bottom: scale(180),
     flexDirection: 'row',
   },
   readFont: {

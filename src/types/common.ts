@@ -10,7 +10,10 @@ export type ArticleType = {
   // name: string,
   image: any,
   description: string
-  category: string
+  category: string,
+  title: string,
+  date: any,
+  content: string
 }
 
 export type CommentType  = { 

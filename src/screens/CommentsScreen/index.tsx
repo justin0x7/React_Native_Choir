@@ -37,8 +37,19 @@ import { AnyAction, Dispatch } from 'redux';
 import { IArticleSlice } from '../../types/slices/article';
 import { ICommentSlice } from '../../types/slices/comment';
 import { IUserSlice } from '../../types/slices/user';
+import { useIsFocused } from '@react-navigation/native';
 
 const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => {
+    // const isFocused = useIsFocused();
+
+    // const [refreshKey, setRefreshKey] = useState(0);
+  
+    // useEffect(() => {
+    //   if (isFocused) {
+    //     // Increment the refresh key to trigger a screen refresh
+    //     setRefreshKey(prevKey => prevKey - 1);
+    //   }
+    // }, [isFocused]);
     const commentData = useSelector((state: RootState) => state.comment.commentData)
     const userData = useSelector((state: RootState) => state.user.userData)
     const dispatch = store.dispatch
@@ -208,7 +219,7 @@ const CommentScreen: React.FC<ICommentScreenProps> = ({ navigation, route }) => 
 
     return (
         <>
-            <View style={styles.mainContainer}>
+            <View style={styles.mainContainer} >
                 <View style={styles.CommentTitle}>
                     <Text style={styles.commentSubject}>
                         Comments

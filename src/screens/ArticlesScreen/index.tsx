@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import {
     Image,
     ScrollView,
@@ -9,8 +9,8 @@ import Footer from '../../components/Footer';
 import SideMenu from '../../components/SideMenu';
 import { IArticleScreenProps } from '../../types/router';
 import styles from "./styles";
+import { scale } from '../../config/dimentions';
 const homeTitle1 = require('../../assets/images/HomeTitle1.png');
-
 
 const ReadArticle: React.FC<IArticleScreenProps> = ({ navigation, route }) => {
     const onPressGotoComments = () => {
@@ -25,17 +25,27 @@ const ReadArticle: React.FC<IArticleScreenProps> = ({ navigation, route }) => {
     const onPressGotoHome = () => {
         console.log('on press goto HomeScreen');
         navigation.navigate("HomeScreen");
-      }
-    
-      const onPressGotoProfile = () => {
+    }
+
+    const onPressGotoProfile = () => {
         console.log('on press goto ProfileScreen');
         navigation.navigate("ProfileScreen");
-      }
-      
-      const onGoToCategory = (page: string) => {
+    }
+
+    const onGoToCategory = (page: string) => {
         console.log('on press goto Business');
-        navigation.navigate("CategoryScreen", {page});
-      }
+        navigation.navigate("CategoryScreen", { page });
+    }
+
+    const { title } = route.params;
+    const { content } = route.params;
+    const scrollViewRef = useRef<ScrollView | null>(null);
+
+    const onScrollTop = () => {
+        if (scrollViewRef.current) {
+            scrollViewRef.current.scrollTo({ y: scale(105), animated: true });
+        }
+    };
 
     return (
         <>
@@ -47,18 +57,19 @@ const ReadArticle: React.FC<IArticleScreenProps> = ({ navigation, route }) => {
                             source={homeTitle1}
                         />
                     </View>
-                    <ScrollView>
+                    <ScrollView
+                        ref={scrollViewRef}
+                        scrollEventThrottle={16}
+                    >
                         <View>
                             <Text style={styles.articleSubject}>
-                                Medieval Moon
-                                Observations Reveal
-                                ‘Mysterious’ Volcanic
-                                Eruptions
+                                {title}
                             </Text>
                         </View>
                         <View>
                             <Text style={styles.articleContent}>
-                                Sed ut perspiciatis unde omnis iste natus error
+                                {content}
+                                {/* Sed ut perspiciatis unde omnis iste natus error
                                 sit voluptatem accusantium doloremque laudantium,
                                 totam rem aperiam, eaque ipsa quae ab illo inventore
                                 veritatis et quasi architecto beatae vitae dicta
@@ -89,7 +100,7 @@ const ReadArticle: React.FC<IArticleScreenProps> = ({ navigation, route }) => {
                                 nisi ut aliquid ex ea commodi consequatur? Quis
                                 autem vel eum iure reprehenderit qui in ea voluptate
                                 velit esse quam nihil molestiae consequatur, vel
-                                illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+                                illum qui dolorem eum fugiat quo voluptas nulla pariatur? */}
                             </Text>
                         </View>
                     </ScrollView>
@@ -97,7 +108,9 @@ const ReadArticle: React.FC<IArticleScreenProps> = ({ navigation, route }) => {
             </View>
             <SideMenu
                 color='black'
-                onComment={onPressGotoComments} />
+                onComment={onPressGotoComments}
+                onToTop={onScrollTop}
+            />
             <Footer
                 onSearch={onPressGotoSearch}
                 onHome={onPressGotoHome}

@@ -14,6 +14,7 @@ import VectorMessage1 from '../assets/images/message1.svg';
 interface Props {
     color: string;
     onComment: any;
+    onToTop: any;
 }
 
 const SideMenu = (props: Props) => {
@@ -22,7 +23,7 @@ const SideMenu = (props: Props) => {
             {props.color === "white" ?
                 (
                     <View style={styles.background}>
-                        <TouchableOpacity activeOpacity={0.5}>
+                        <TouchableOpacity activeOpacity={0.5} onPress={props.onToTop}>
                             <VectorUp width={40} height={50} />
                         </TouchableOpacity>
                         <TouchableOpacity activeOpacity={0.5} onPress={props.onComment} >
