@@ -19,6 +19,7 @@ import styles from "./styles";
 import GoToPrev from '../../components/GoToPrev';
 import { testArticleData } from '../../assets/testData';
 import AppColors from '../../config/colors';
+import { useIsFocused } from '@react-navigation/native';
 // import { TabView, SceneMap } from 'react-native-tab-view';
 // import { useWindowDimensions } from 'react-native';
 
@@ -78,9 +79,6 @@ const CategoryScreen: React.FC<ICategoryScreenProps> = ({ navigation, route }) =
   }
 
   const categoryName: string = String(page);
-  const [searchQuery, setSearchQuery] = useState<string>('');
-
-  const onChangeSearch = (query: string) => setSearchQuery(query);
 
   // const layout = useWindowDimensions();
 

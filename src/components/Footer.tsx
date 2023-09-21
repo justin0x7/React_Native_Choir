@@ -30,7 +30,7 @@ const Footer = (props: Props) => {
       if (isFocused) {
         // Increment the refresh key to trigger a screen refresh
         setModalVisible(false);
-        setRefreshKey(prevKey => prevKey - 1);
+        setRefreshKey(prevKey => prevKey + 1);
       }
     }, [isFocused]);
     const [modalVisible, setModalVisible] = useState(false);

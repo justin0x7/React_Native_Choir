@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import AppColors from '../config/colors';
 import { Metrics, scale } from '../config/dimentions';
 
 import VectorUp from '../assets/images/GoBack.svg';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import Cross from '../assets/images/Cross.svg';
 
 interface Props {
@@ -20,6 +20,17 @@ interface Props {
 }
 
 const CategoryModal = (props: Props) => {
+    // const isFocused = useIsFocused();
+
+    // const [refreshKey, setRefreshKey] = useState(0);
+  
+    // useEffect(() => {
+    //   if (isFocused) {
+    //     // Increment the refresh key to trigger a screen refresh
+    //     // setModalVisible(false);
+    //     setRefreshKey(prevKey => prevKey + 1);
+    //   }
+    // }, [isFocused]);
     
     return (
         <>

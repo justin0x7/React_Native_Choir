@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   FlatList,
   Image,
@@ -18,6 +18,7 @@ import store, { RootState } from '../../store';
 import { readCommentData } from '../../store/slices/comment.slice';
 import { readUserData } from '../../store/slices/user.slice';
 import { readArticleData } from '../../store/slices/article.slice';
+import { scale } from '../../config/dimentions';
 const homeImage = require('../../assets/images/Home.png');
 const homeTitle = require('../../assets/images/HomeTitle.png');
 
@@ -70,6 +71,16 @@ const HomeScreen: React.FC<IHomeScreenProps> = ({ navigation, route }) => {
     return items.sort((a: any, b: any) => b.date - a.date)[0];
   });
 
+  const scrollViewRef = useRef<ScrollView | null>(null);
+
+    const onScrollTop = () => {
+        // if (scrollViewRef.current) {
+            scrollViewRef.current?.scrollTo({ y: -scale(50), animated: true });
+            console.log('Y position:', scrollViewRef.current)
+        // }
+    };
+
+
   const renderItem = ({ item }: any) => {
     return (
       <>
@@ -116,7 +127,7 @@ const HomeScreen: React.FC<IHomeScreenProps> = ({ navigation, route }) => {
       <SideMenu
         onComment={onPressGotoComments}
         color='white'
-        onToTop={''}
+        onToTop={onScrollTop}
       />
       <Footer
         onSearch={onPressGotoSearch}

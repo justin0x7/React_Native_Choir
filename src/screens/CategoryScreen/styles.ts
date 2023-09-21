@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     width: Metrics.screenWidth,
-    paddingBottom: scale(90),
+    // paddingBottom: scale(90),
   },
   searchTitle: {
     alignItems: 'center',
